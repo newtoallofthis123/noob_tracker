@@ -1,0 +1,20 @@
+[package]
+name = "noob_tracker"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+rusqlite = { version = "0.36.0", features = ["bundled"] }
+sea-query = "0"
+chrono = "0.4.31"
+rand = "0.8.5"
+clap = { version = "4.4.16", features = ["derive", "cargo"] }
+clap_complete = "4.5.40"
+colored = "2.1.0"
+dirs = "5.0.1"
+serde = { version = "1.0.195", features = ["derive"] }
+toml = { version = "0.8.8", features = ["preserve_order"] }
+inquire = { version = "0.7", default-features = false, features = [
+    "crossterm",
+] }
+tabled = "0.17"
