@@ -2,12 +2,13 @@ use std::str::FromStr;
 
 use chrono::{DateTime, Local};
 use sea_query::{Expr, Query, SqliteQueryBuilder};
+use tabled::Tabled;
 
 use crate::{db::Db, utils::random_hash};
 
 use super::Categories;
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Tabled)]
 pub struct Category {
     pub id: String,
     pub name: String,

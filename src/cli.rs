@@ -45,6 +45,61 @@ fn general_account_options() -> Vec<Arg> {
     ]
 }
 
+fn general_category_options() -> Vec<Arg> {
+    vec![
+        Arg::new("id")
+            .short('i')
+            .long("id")
+            .action(ArgAction::Set)
+            .help("The id of the category"),
+        Arg::new("name")
+            .short('n')
+            .long("name")
+            .action(ArgAction::Set)
+            .help("The name of the category"),
+        Arg::new("icon")
+            .short('c')
+            .long("icon")
+            .action(ArgAction::Set)
+            .help("The icon of the category"),
+    ]
+}
+
+fn general_transaction_options() -> Vec<Arg> {
+    vec![
+        Arg::new("id")
+            .short('i')
+            .long("id")
+            .action(ArgAction::Set)
+            .help("The id of the transaction"),
+        Arg::new("account_id")
+            .short('a')
+            .long("account-id")
+            .action(ArgAction::Set)
+            .help("The account id of the transaction"),
+        Arg::new("amount")
+            .short('m')
+            .long("amount")
+            .action(ArgAction::Set)
+            .help("The amount of the transaction (in cents)"),
+        Arg::new("type")
+            .short('t')
+            .long("type")
+            .action(ArgAction::Set)
+            .help("The type of the transaction (credit/debit)"),
+        Arg::new("description")
+            .short('d')
+            .long("description")
+            .action(ArgAction::Set)
+            .help("The description of the transaction"),
+        Arg::new("category_id")
+            .short('c')
+            .long("category-id")
+            .action(ArgAction::Set)
+            .help("The category id of the transaction"),
+    ]
+}
+
 pub fn setup_cli() -> Command {
     command!()
         .author("NoobScience <noobscience@duck.com>")
@@ -92,7 +147,7 @@ pub fn setup_cli() -> Command {
                 .subcommand(
                     Command::new("create")
                         .about("Create a new account")
-                        .args(general_account_options()),
+                        .args(&general_account_options()[1..]),
                 )
                 .subcommand(Command::new("list").about("List all accounts"))
                 .subcommand(
@@ -109,6 +164,84 @@ pub fn setup_cli() -> Command {
                     Command::new("update")
                         .about("Update an account")
                         .args(general_account_options()),
+                ),
+        )
+        .subcommand(
+            Command::new("category")
+                .about("Manage Categories")
+                .subcommand(
+                    Command::new("create")
+                        .about("Create a new category")
+                        .args(&general_category_options()[1..]),
+                )
+                .subcommand(Command::new("list").about("List all categories"))
+                .subcommand(
+                    Command::new("get")
+                        .about("Get a category")
+                        .args(general_category_options()),
+                )
+                .subcommand(
+                    Command::new("delete")
+                        .about("Delete a category")
+                        .args(general_category_options()),
+                )
+                .subcommand(
+                    Command::new("update")
+                        .about("Update a category")
+                        .args(general_category_options()),
+                ),
+        )
+        .subcommand(
+            Command::new("transaction")
+                .about("Manage Transactions")
+                .subcommand(
+                    Command::new("create")
+                        .about("Create a new transaction")
+                        .args(&general_transaction_options()[1..]),
+                )
+                .subcommand(
+                    Command::new("list")
+                        .about("List all transactions")
+                        .arg(
+                            Arg::new("account_id")
+                                .short('a')
+                                .long("account-id")
+                                .action(ArgAction::Set)
+                                .help("Filter by account id"),
+                        ),
+                )
+                .subcommand(
+                    Command::new("get")
+                        .about("Get a transaction")
+                        .arg(
+                            Arg::new("id")
+                                .short('i')
+                                .long("id")
+                                .action(ArgAction::Set)
+                                .help("The id of the transaction"),
+                        ),
+                )
+                .subcommand(
+                    Command::new("delete")
+                        .about("Delete a transaction")
+                        .arg(
+                            Arg::new("id")
+                                .short('i')
+                                .long("id")
+                                .action(ArgAction::Set)
+                                .help("The id of the transaction"),
+                        ),
+                )
+                .subcommand(
+                    Command::new("update")
+                        .about("Update a transaction")
+                        .arg(
+                            Arg::new("id")
+                                .short('i')
+                                .long("id")
+                                .action(ArgAction::Set)
+                                .help("The id of the transaction"),
+                        ),
                 ),
         )
 }

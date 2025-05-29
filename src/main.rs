@@ -55,6 +55,44 @@ fn main() {
             _ => {}
         },
 
+        Some(("category", sub_matches)) => match sub_matches.subcommand() {
+            Some(("create", sub_matches)) => {
+                handler.add_category(sub_matches).unwrap();
+            }
+            Some(("list", sub_matches)) => {
+                handler.list_categories(sub_matches).unwrap();
+            }
+            Some(("get", sub_matches)) => {
+                handler.get_category(sub_matches).unwrap();
+            }
+            Some(("delete", sub_matches)) => {
+                handler.delete_category(sub_matches).unwrap();
+            }
+            Some(("update", sub_matches)) => {
+                handler.update_category(sub_matches).unwrap();
+            }
+            _ => {}
+        },
+
+        Some(("transaction", sub_matches)) => match sub_matches.subcommand() {
+            Some(("create", sub_matches)) => {
+                handler.add_transaction(sub_matches).unwrap();
+            }
+            Some(("list", sub_matches)) => {
+                handler.list_transactions(sub_matches).unwrap();
+            }
+            Some(("get", sub_matches)) => {
+                handler.get_transaction(sub_matches).unwrap();
+            }
+            Some(("delete", sub_matches)) => {
+                handler.delete_transaction(sub_matches).unwrap();
+            }
+            Some(("update", sub_matches)) => {
+                handler.update_transaction(sub_matches).unwrap();
+            }
+            _ => {}
+        },
+
         _ => {}
     }
 }

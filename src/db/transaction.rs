@@ -2,12 +2,13 @@ use std::str::FromStr;
 
 use chrono::{DateTime, Local};
 use sea_query::{Expr, Query, SqliteQueryBuilder};
+use tabled::Tabled;
 
 use crate::{db::Db, utils::random_hash};
 
 use super::Transactions;
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Tabled)]
 pub struct Transaction {
     pub id: String,
     pub account_id: String,
